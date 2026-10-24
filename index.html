@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shalola uchun ❤ Neon Particle Heart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600;800&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Orqa fon: yulduzlar, kometalar, zarrachali yurak -->
+  <canvas id="scene"></canvas>
+  <!-- Sichqoncha / bosilganda chiqadigan qizil yurakchalar -->
+  <canvas id="fx"></canvas>
+
+  <!-- Saytga kirganda "I love you" animatsiyasi -->
+  <div id="intro">
+    <div class="intro-glow"></div>
+    <div id="introText" class="intro-text" aria-label="I love you"></div>
+    <p class="intro-skip">davom etish uchun bosing</p>
+  </div>
+
+  <!-- Menyu -->
+  <header class="nav">
+    <a href="#home" class="brand">♥ Shalola</a>
+    <nav>
+      <a href="#home">Bosh sahifa</a>
+      <a href="#" data-open="giftModal">Maxsus sovg'a</a>
+      <a href="#" data-open="secretModal">Sirli so'z</a>
+      <a href="#story">Bizning hikoyamiz</a>
+      <a href="#contact">Aloqa</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <h1 class="title">Neon Particle Heart</h1>
+
+      <div class="love-bg" aria-hidden="true">I love you</div>
+      <div class="love love-left" aria-hidden="true">I love you</div>
+      <div class="love love-right" aria-hidden="true">I love you</div>
+
+      <div class="name">Shalola</div>
+
+      <div class="hero-buttons">
+        <button class="btn btn-main" data-open="giftModal">🎁 Special Gift</button>
+        <button class="btn" data-open="secretModal">💌 Sirli so'zni o'qish</button>
+      </div>
+    </section>
+
+    <!-- KARTALAR -->
+    <section class="cards">
+      <article class="card">
+        <div class="card-icon">💍</div>
+        <h3>Special Gift</h3>
+        <p>Faqat Shalola uchun tayyorlangan sovg'a. Ichida nimadir yaltirab turibdi...</p>
+        <button class="btn btn-main" data-open="giftModal">Sovg'ani ochish</button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">📜</div>
+        <h3>Sirli so'zni o'qish</h3>
+        <p class="script">Men seni sevaman</p>
+        <button class="btn" data-open="secretModal">O'qish</button>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">❤</div>
+        <h3>Sichqoncha harakati</h3>
+        <p>Sichqonchani qimirlating — qirmizi yurakchalar paydo bo'ladi. Bossangiz, ular ko'payadi!</p>
+        <button class="btn" id="tryHearts">Sinab ko'rish</button>
+      </article>
+    </section>
+
+    <!-- HIKOYA -->
+    <section id="story" class="story">
+      <h2 class="section-title">Bizning hikoyamiz</h2>
+
+      <div class="counter">
+        <span class="counter-num" id="days">0</span>
+        <span class="counter-label">kundan beri yuraklarimiz birga ❤</span>
+      </div>
+
+      <div class="timeline">
+        <!-- O'ZGARTIRING: o'zingizning sanalaringiz va so'zlaringizni yozing -->
+        <div class="tl-item"><span class="tl-dot"></span><h4>Birinchi uchrashuv</h4><p>Hamma narsa shu kundan boshlandi...</p></div>
+        <div class="tl-item"><span class="tl-dot"></span><h4>Birinchi kulgi</h4><p>Sening kulgingni eshitgan zahotim, yuragim jim bo'lib qoldi.</p></div>
+        <div class="tl-item"><span class="tl-dot"></span><h4>Bugun va ertaga</h4><p>Biz baxtli bo'lamiz, xudo xohlasa.</p></div>
+      </div>
+
+      <div class="reason-box">
+        <button class="btn btn-main" id="reasonBtn">💗 Seni sevishimning sababi</button>
+        <p id="reasonText" class="reason-text"></p>
+      </div>
+    </section>
+
+    <!-- ALOQA -->
+    <section id="contact" class="contact">
+      <h2 class="section-title">Aloqa</h2>
+      <p class="letter">Men har doim shu yerdaman —<br>yuragingning eng yaqin joyida. ❤</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>“Sen — mening eng go'zal orzuyim”</p>
+    <small>Shalola uchun, butun yurakdan ♥</small>
+  </footer>
+
+  <!-- Pastdagi tugmalar -->
+  <div class="dock">
+    <button data-act="hearts" title="Yurakchalar">♥</button>
+    <button data-act="stars" title="Yulduzlar yomg'iri">★</button>
+    <button data-act="moon" title="Oy nuri">☾</button>
+    <button data-act="music" id="musicBtn" title="Musiqa">♪</button>
+  </div>
+
+  <!-- MODAL: SOVG'A (3D uzuk) -->
+  <div class="modal" id="giftModal">
+    <div class="modal-card gift-card">
+      <button class="x" data-close aria-label="Yopish">✕</button>
+      <h2 class="modal-title">Special Gift ✦ Shalola uchun</h2>
+      <div id="ringStage" class="ring-stage"></div>
+      <p class="modal-hint">Uzukni sichqoncha bilan aylantiring ✦</p>
+    </div>
+  </div>
+
+  <!-- MODAL: SIRLI SO'Z -->
+  <div class="modal" id="secretModal">
+    <div class="modal-card parchment">
+      <button class="x x-dark" data-close aria-label="Yopish">✕</button>
+      <p class="p-small">Sirli so'z</p>
+      <button id="secretBtn" class="secret-line">Men seni sevaman</button>
+      <p class="p-hint">bosing ✦</p>
+      <div id="secretReveal" class="reveal" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening Veb-saytim</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="content">
+        <h1>Xush kelibsiz!</h1>
+        <p>Bu matn orqa fondagi rasm ustida ko'rinadi.</p>
+    </div>
+
+</body>
+</html>
